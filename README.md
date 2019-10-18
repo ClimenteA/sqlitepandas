@@ -1,5 +1,5 @@
 # sqlitepandas
-The most simple SQLITE ORM for data scientists!
+The most simple SQLITE ORM for Data scientists!
 
 
 
