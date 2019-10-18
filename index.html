@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module sqlitepandas</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>sqlitepandas</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:c%3A%5Cusers%5Cpublic%5Cdocuments%5Cpython%20scripts%5Csqlitepandas.py">c:\users\public\documents\python scripts\sqlitepandas.py</a></font></td></tr></table>
+    <p></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="pandas.html">pandas</a><br>
+</td><td width="25%" valign=top><a href="sqlite3.html">sqlite3</a><br>
+</td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="builtins.html#object">builtins.object</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="sqlitepandas.html#DB">DB</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="DB">class <strong>DB</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>The&nbsp;super&nbsp;simple&nbsp;ORM&nbsp;for&nbsp;Data&nbsp;Scientists!<br>
+It&nbsp;performs&nbsp;basic&nbsp;CRUD&nbsp;operations&nbsp;on&nbsp;SQLITE3&nbsp;database.<br>
+&nbsp;<br>
+Observations:&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Columns&nbsp;must&nbsp;be&nbsp;in&nbsp;this&nbsp;format&nbsp;"ColName"&nbsp;or&nbsp;"col_name"&nbsp;(NO&nbsp;SPACES&nbsp;ALLOWED)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Commas&nbsp;','&nbsp;are&nbsp;NOT&nbsp;accepted<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;The&nbsp;more&nbsp;data&nbsp;you&nbsp;have&nbsp;the&nbsp;more&nbsp;slower&nbsp;it&nbsp;will&nbsp;be&nbsp;(it&nbsp;uses&nbsp;pandas&nbsp;for&nbsp;working&nbsp;with&nbsp;sqlite)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;It&nbsp;will&nbsp;set&nbsp;a&nbsp;column&nbsp;'ID'&nbsp;as&nbsp;primary&nbsp;key&nbsp;when&nbsp;you&nbsp;add&nbsp;a&nbsp;table<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;All&nbsp;columns&nbsp;(except&nbsp;ID)&nbsp;will&nbsp;have&nbsp;datatype&nbsp;TEXT...<br>
+&nbsp;<br>
+&nbsp;TODO&nbsp;-&nbsp;Implement&nbsp;and&nbsp;test&nbsp;in&nbsp;chunks&nbsp;(chunk_size)&nbsp;feature&nbsp;for&nbsp;bigger&nbsp;tables&nbsp;<br>
+&nbsp;For&nbsp;now&nbsp;it's&nbsp;ok&nbsp;if&nbsp;table&nbsp;is&nbsp;under&nbsp;10.000&nbsp;rows,&nbsp;if&nbsp;more&nbsp;it&nbsp;will&nbsp;get&nbsp;slow..<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="DB-__init__"><strong>__init__</strong></a>(self, database_path)</dt><dd><tt>Require&nbsp;path&nbsp;to&nbsp;database&nbsp;as&nbsp;parameter</tt></dd></dl>
+
+<dl><dt><a name="DB-add_row"><strong>add_row</strong></a>(self, table_name, one_row_df)</dt><dd><tt>Insert&nbsp;one&nbsp;row&nbsp;in&nbsp;the&nbsp;database.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;table_name&nbsp;-&nbsp;name&nbsp;of&nbsp;the&nbsp;table&nbsp;<br>
+&nbsp;&nbsp;&nbsp;one_row_df&nbsp;-&nbsp;a&nbsp;pandas&nbsp;dataframe&nbsp;with&nbsp;just&nbsp;one&nbsp;row</tt></dd></dl>
+
+<dl><dt><a name="DB-add_rows"><strong>add_rows</strong></a>(self, table_name, df)</dt><dd><tt>Add&nbsp;multiple&nbsp;rows&nbsp;to&nbsp;an&nbsp;sqlite&nbsp;table&nbsp;one&nbsp;by&nbsp;one.<br>
+table_name&nbsp;-&nbsp;name&nbsp;of&nbsp;the&nbsp;table<br>
+df&nbsp;-&nbsp;a&nbsp;pandas&nbsp;dataframe&nbsp;(careful&nbsp;on&nbsp;the&nbsp;size&nbsp;may&nbsp;take&nbsp;a&nbsp;while)<br>
+You&nbsp;can&nbsp;just&nbsp;use&nbsp;this&nbsp;instead&nbsp;of&nbsp;add_row&nbsp;def</tt></dd></dl>
+
+<dl><dt><a name="DB-append_table"><strong>append_table</strong></a>(self, table_name, df)</dt><dd><tt>"<br>
+Append&nbsp;df&nbsp;to&nbsp;an&nbsp;existing&nbsp;table&nbsp;in&nbsp;the&nbsp;database</tt></dd></dl>
+
+<dl><dt><a name="DB-create_table"><strong>create_table</strong></a>(self, table_name, df)</dt><dd><tt>"<br>
+Create&nbsp;a&nbsp;sqlite&nbsp;table&nbsp;with&nbsp;and&nbsp;ID&nbsp;INTEGER&nbsp;PRIMARY&nbsp;KEY<br>
+If&nbsp;a&nbsp;table&nbsp;with&nbsp;that&nbsp;name&nbsp;exists&nbsp;replace&nbsp;that&nbsp;table&nbsp;with&nbsp;the&nbsp;current&nbsp;one</tt></dd></dl>
+
+<dl><dt><a name="DB-execute_query"><strong>execute_query</strong></a>(self, query, keep_connection=False)</dt><dd><tt>Execute&nbsp;query,&nbsp;commit&nbsp;and&nbsp;close&nbsp;query</tt></dd></dl>
+
+<dl><dt><a name="DB-get_connection"><strong>get_connection</strong></a>(self)</dt><dd><tt>Connect&nbsp;to&nbsp;a&nbsp;db&nbsp;and&nbsp;if&nbsp;it&nbsp;not&nbsp;exists&nbsp;creates&nbsp;one&nbsp;with&nbsp;the&nbsp;name&nbsp;given</tt></dd></dl>
+
+<dl><dt><a name="DB-get_row"><strong>get_row</strong></a>(self, table_name, row_index=None, column_name=None, row_value=None, as_dict=False, chunk_size=None)</dt><dd><tt>get_row&nbsp;from&nbsp;'table_name'&nbsp;where&nbsp;'column_name'&nbsp;has&nbsp;this&nbsp;'row_value'<br>
+or&nbsp;get&nbsp;row&nbsp;where&nbsp;ID&nbsp;=&nbsp;row_index</tt></dd></dl>
+
+<dl><dt><a name="DB-get_rows"><strong>get_rows</strong></a>(self, table_name, row_indexes=None, column_name=None, row_values=None, as_dict=False, chunk_size=None)</dt><dd><tt>get_row&nbsp;from&nbsp;'table_name'&nbsp;where&nbsp;'column_name'&nbsp;has&nbsp;this&nbsp;'row_values'&nbsp;(list)<br>
+or&nbsp;get&nbsp;row&nbsp;where&nbsp;index&nbsp;=&nbsp;row_indexes&nbsp;(list)<br>
+You&nbsp;can&nbsp;just&nbsp;use&nbsp;this&nbsp;instead&nbsp;of&nbsp;get_row&nbsp;def</tt></dd></dl>
+
+<dl><dt><a name="DB-get_table"><strong>get_table</strong></a>(self, table_name, as_dict=False, chunk_size=None)</dt><dd><tt>Get&nbsp;table&nbsp;from&nbsp;the&nbsp;database&nbsp;as&nbsp;a&nbsp;pandas&nbsp;dataframe&nbsp;<br>
+table_name&nbsp;-&nbsp;name&nbsp;of&nbsp;the&nbsp;table<br>
+as_dict=False&nbsp;-&nbsp;option&nbsp;to&nbsp;get&nbsp;the&nbsp;df&nbsp;as&nbsp;dict('list')&nbsp;pandas&nbsp;format&nbsp;ex:&nbsp;{"col1":&nbsp;['a','b','c'],&nbsp;"col2":&nbsp;['d','f','g']}<br>
+(NOT&nbsp;TESTED)chunk_size&nbsp;-&nbsp;is&nbsp;df&nbsp;is&nbsp;to&nbsp;big&nbsp;you&nbsp;can&nbsp;get&nbsp;it&nbsp;in&nbsp;chunks,&nbsp;where&nbsp;chunk_size&nbsp;=&nbsp;number&nbsp;of&nbsp;rows,&nbsp;it&nbsp;will&nbsp;return&nbsp;also&nbsp;the&nbsp;connection</tt></dd></dl>
+
+<dl><dt><a name="DB-get_tables"><strong>get_tables</strong></a>(self, table_names, as_dict=False, chunk_size=None)</dt><dd><tt>Get&nbsp;tables&nbsp;from&nbsp;database&nbsp;in&nbsp;a&nbsp;dict<br>
+table_names&nbsp;-&nbsp;names&nbsp;of&nbsp;the&nbsp;table&nbsp;-&nbsp;LIST<br>
+as_dict=False&nbsp;-&nbsp;option&nbsp;to&nbsp;get&nbsp;the&nbsp;df&nbsp;as&nbsp;dict('list')&nbsp;pandas&nbsp;format&nbsp;ex:&nbsp;{"col1":&nbsp;['a','b','c'],&nbsp;"col2":&nbsp;['d','f','g']}<br>
+(NOT&nbsp;TESTED)chunk_size&nbsp;-&nbsp;is&nbsp;df&nbsp;is&nbsp;to&nbsp;big&nbsp;you&nbsp;can&nbsp;get&nbsp;it&nbsp;in&nbsp;chunks,&nbsp;where&nbsp;chunk_size&nbsp;=&nbsp;number&nbsp;of&nbsp;rows,&nbsp;it&nbsp;will&nbsp;return&nbsp;also&nbsp;the&nbsp;connection</tt></dd></dl>
+
+<dl><dt><a name="DB-remove_row"><strong>remove_row</strong></a>(self, table_name, one_row_df=None, id_value=None)</dt><dd><tt>Delete&nbsp;row&nbsp;or&nbsp;rows&nbsp;by&nbsp;maching</tt></dd></dl>
+
+<dl><dt><a name="DB-remove_rows"><strong>remove_rows</strong></a>(self, table_name, df=None, id_values=None)</dt><dd><tt>Remove&nbsp;rows&nbsp;from&nbsp;table&nbsp;based&nbsp;on&nbsp;the&nbsp;dataframe&nbsp;or&nbsp;list&nbsp;of&nbsp;ID's&nbsp;given<br>
+You&nbsp;can&nbsp;just&nbsp;use&nbsp;this&nbsp;instead&nbsp;of&nbsp;remove_row&nbsp;def</tt></dd></dl>
+
+<dl><dt><a name="DB-remove_table"><strong>remove_table</strong></a>(self, table_name)</dt><dd><tt>Delete/remove&nbsp;table&nbsp;from&nbsp;database</tt></dd></dl>
+
+<dl><dt><a name="DB-update_cells"><strong>update_cells</strong></a>(self, table_name, df)</dt><dd><tt>Update&nbsp;cells&nbsp;of&nbsp;the&nbsp;table&nbsp;in&nbsp;the&nbsp;database</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table></td></tr></table>
+</body></html>
