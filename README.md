@@ -9,5 +9,4 @@ Just copy the sqlitepandas.py file where you need it.
 
 ### Usage
 
-Checkout sqlitepandas_test.ipynb to see how you can use it! (File is to big for github you will need to download it..)
-
+Checkout sqlitepandas_test.ipynb to see how you can use it! 
