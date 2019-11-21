@@ -27,7 +27,10 @@ Append dataframe to an existing table in the database
 ```
 db.append_table("table_name", dataframe)
 ```
-
+Get row from table based on row index or column name and a row value (Similar to SELECT FROM X WHERE column = Y)  
+```
+db.get_row("table_name", row_index=None, column_name=None, row_value=None, as_dict=False)
+```
 
 
 
