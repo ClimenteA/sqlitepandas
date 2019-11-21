@@ -231,7 +231,7 @@ class DB:
         return df
         
         
-    def remove_row(self, table_name, one_row_df=None, id_value=None):
+    def remove_row(self, table_name, one_row_df=None, row_index=None):
         """
             Delete row or rows by maching
         """
@@ -252,12 +252,12 @@ class DB:
             
             return self.execute_query(sql_statement)
         
-        elif id_value != None:
-            condition = "`ID`='{}'".format(str(id_value))
+        elif row_index != None:
+            condition = "`ID`='{}'".format(str(row_index))
             sql_statement = "DELETE FROM `{}` WHERE {}".format(table_name, condition)
             return self.execute_query(sql_statement)
        
-    def remove_rows(self, table_name, df=None, id_values=None):
+    def remove_rows(self, table_name, df=None, row_indexes=None):
         """
             Remove rows from table based on the dataframe or list of ID's given
             You can just use this instead of remove_row def
@@ -268,10 +268,10 @@ class DB:
                 one_row_df = df.loc[[idx]]
                 self.remove_row(table_name, one_row_df, id_value=None)
         elif isinstance(id_values, list):
-            for id_value in id_values:
-                self.remove_row(table_name, one_row_df=None, id_value=id_value)
+            for id_value in row_indexes:
+                self.remove_row(table_name, one_row_df=None, row_index=id_value)
         else:
-            raise Exception("You must have either a df or a list with id_values")
+            raise Exception("You must have either a df or a list with row_indexes")
         
         
 
