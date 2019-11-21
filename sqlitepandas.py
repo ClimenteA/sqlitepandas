@@ -231,7 +231,7 @@ class DB:
         return df
         
         
-    def remove_row(self, table_name, one_row_df=None, row_index=None):
+    def remove_row(self, table_name, one_row_df=None, id_value=None):
         """
             Delete row or rows by maching
         """
@@ -252,8 +252,8 @@ class DB:
             
             return self.execute_query(sql_statement)
         
-        elif row_index != None:
-            condition = "`ID`='{}'".format(str(row_index))
+        elif id_value != None:
+            condition = "`ID`='{}'".format(str(id_value))
             sql_statement = "DELETE FROM `{}` WHERE {}".format(table_name, condition)
             return self.execute_query(sql_statement)
        
