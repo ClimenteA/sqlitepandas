@@ -31,8 +31,10 @@ Get row from table based on row index or column name and a row value (Similar to
 ```
 db.get_row(table_name, row_index=None, column_name=None, row_value=None, as_dict=False)
 ```
-
-
+Remove a row from the database based on one row dataframe or the row index
+```
+db.remove_row(table_name, one_row_df=None, row_index=None)
+```
 
 
 Checkout sqlitepandas_test.ipynb to see how you can use it! 
