@@ -1,5 +1,8 @@
 import sqlite3
 import pandas as pd
+pd.options.mode.chained_assignment = None #SettingWithCopyWarning
+pd.set_option("display.max_columns", None)
+
 
 
 class DB:
@@ -56,8 +59,10 @@ class DB:
             Create a sqlite table with and ID INTEGER PRIMARY KEY
             If a table with that name exists replace that table with the current one
         """
+        if "ID" in df:
+            df.drop("ID", axis=1, inplace=True)
         self.execute_query("DROP TABLE IF EXISTS {};".format(table_name))
-        sqlcolumns = ["`ID` INTEGER PRIMARY KEY"] + ["`{}` TEXT".format(col) for col in df.columns.tolist()] 
+        sqlcolumns = ["`ID` INTEGER PRIMARY KEY"] + ["`{}` TEXT".format(col.strip()) for col in df.columns.tolist()] 
         sql_statement = "CREATE TABLE" + " `{}` ".format(table_name) + "(" + ", ".join(sqlcolumns) + ");"
         self.execute_query(sql_statement)
         self.append_table(table_name, df)
@@ -67,14 +72,19 @@ class DB:
         """"
             Append df to an existing table in the database
         """
+        df.columns = [col.strip() for col in df.columns.tolist()]
         conn = self.get_connection()
-        df.to_sql(table_name, conn, if_exists="append", index=False)
-        conn.commit()
-        conn.close()
-        
-    def remove_table(self, table_name):
+        try:
+            df.to_sql(table_name, conn, if_exists="append", index=False)
+            conn.commit()
+            conn.close()
+        except Exception as e:
+            conn.close()
+            raise Exception(str(e))
+
+
+    def drop_table(self, table_name):
         """Delete/remove table from database"""
-        
         sql_statement = "DROP TABLE " + table_name
         return self.execute_query(sql_statement)
       
@@ -91,6 +101,10 @@ class DB:
         query = "SELECT * FROM {}".format(table_name)
         conn = self.get_connection()
         df = pd.read_sql_query(query, conn, chunksize=chunk_size)
+        
+        #Set column ID as index for the df given
+        df["IDX"] = df["ID"]
+        df.set_index("IDX", inplace=True)
         
         if as_dict:
             df = df.to_dict("list")
